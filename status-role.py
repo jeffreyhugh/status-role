@@ -23,6 +23,11 @@ async def on_member_update(before, after):
     except AttributeError:
         afterActivity = None
 
+    ignoreCharacters = ["®"]
+    for c in ignoreCharacters:
+        beforeActivity = beforeActivity.strip(c)
+        afterActivity = afterActivity.strip(c)
+
 
     # Check to make sure the status changed before doing anything
     if beforeActivity != afterActivity:
@@ -30,7 +35,6 @@ async def on_member_update(before, after):
 
         # Iterate through roles, choose and assign
         beforeRoles = before.roles
-        beforeRolesCheck = beforeRoles
 
         for r in before.guild.roles:
             if r.name == afterActivity:
