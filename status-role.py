@@ -5,6 +5,10 @@ import asyncio
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("!!"))
 
 @bot.event
+async def on_ready():
+    print("{} is logged in and ready!".format(bot.user))
+
+@bot.event
 async def on_member_update(before, after):
     '''Listen for member change events (status changes are included in this)'''
 
@@ -37,8 +41,7 @@ async def on_member_update(before, after):
                 # If there's a role with the same name as what they were doing
                 beforeRoles.remove(r)
 
-        if beforeRoles != beforeRolesCheck:
-            # This might throw an error, but it will ignore the error.
-            await before.edit(roles=beforeRoles)
+        # This might throw an error, but it will ignore the error.
+        await before.edit(roles=beforeRoles)
 
 bot.run("YOUR TOKEN GOES HERE")
