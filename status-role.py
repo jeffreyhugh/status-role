@@ -25,9 +25,10 @@ async def on_member_update(before, after):
 
     ignoreCharacters = ["®"]
     for c in ignoreCharacters:
-        beforeActivity = beforeActivity.strip(c)
-        afterActivity = afterActivity.strip(c)
-
+        if beforeActivity != None:
+            beforeActivity = beforeActivity.strip(c)
+        if afterActivity != None:
+            afterActivity = afterActivity.strip(c)
 
     # Check to make sure the status changed before doing anything
     if beforeActivity != afterActivity:
